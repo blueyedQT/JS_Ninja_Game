@@ -2,64 +2,117 @@
 <head>
 	<title>Character Game</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<style type="text/css">
+		#game {
+			background-image: url("ninja_game/img/map.png");
+			height: 565px;
+			width: 540px;
+			border: 3px solid black;
+		}
+	</style>
 </head> 
 <body>
-
-	<div id="character" style="position:absolute; top:0px; left:0px;"><img src="ninja_game/img/down1.png"></img></div>
+	<div id="game">
+		<div id="character1" style="position:absolute; top:0px; left:500px;"><img src="images/character1/down1.png"></img></div>
+		<div id="character2" style="position:absolute; top:0px; left:0px;"><img src="ninja_game/img/p2down2.png"></img></div>
+	</div>
 
 	<script>
 	function gameLoop()	{
-		$('#character').css({left: x, top: y});
+		$('#character1').css({left: x, top: y});
+		$('#character2').css({left: a, top: b});
 	}
 	setInterval(gameLoop, 150);
-	var x=0, y=0, last_key=0, count=0;
+	var x=500, y=0, a=0, b=0, last_key=0, count=0;
 	document.onkeydown = function(e) {
-		if(e.keyCode == 37) {
-			x = x-10;
-			if(last_key == 37 && count%2 == 0) {
-				$('#character').html('<img src="ninja_game/img/left2.png" />');
-			} else {
-				$('#character').html('<img src="ninja_game/img/left1.png" />');
+		if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
+			if(e.keyCode == 37) {
+				x = x-10;
+				if(last_key == 37 && count%2 == 0) {
+					$('#character1').html('<img src="images/character1/left2.png" />');
+				} else {
+					$('#character1').html('<img src="images/character1/left1.png" />');
+				}
+				if(x < 0) {
+					x = 0;
+				}
+			} else if(e.keyCode == 38) {
+				y = y-10;
+				if(last_key == 38 && count%2 == 0) {
+					$('#character1').html('<img src="images/character1/top2.png" />');
+				} else {
+					$('#character1').html('<img src="images/character1/top1.png" />');
+				}
+				if(y<0) {
+					y = 0;
+				}
+			} else if(e.keyCode == 39) {
+				x = x+10;
+				if(last_key == 39 && count%2 == 0) {
+					$('#character1').html('<img src="images/character1/right2.png" />');
+				} else {
+					$('#character1').html('<img src="images/character1/right1.png" />');
+				}
+				if(x > 500) {
+					x = 500;
+				}
+			} else if(e.keyCode == 40) {
+				y = y+10;
+				if(last_key == 40 && count%2 == 0) {
+					$('#character1').html('<img src="images/character1/down1.png" />');
+				} else {
+					$('#character1').html('<img src="images/character1/down2.png" />');
+				}
+				if(y>500) {
+					y = 500;
+				}
 			}
-			if(x<0) {
-				x = 0;
-			}
-		} else if(e.keyCode == 38) {
-			y = y-10;
-			if(last_key == 38 && count%2 == 0) {
-				$('#character').html('<img src="ninja_game/img/top2.png" />');
-			} else {
-				$('#character').html('<img src="ninja_game/img/top1.png" />');
-			}
-			if(y<0) {
-				y = 0;
-			}
-		} else if(e.keyCode == 39) {
-			x = x+10;
-			if(last_key == 39 && count%2 == 0) {
-				$('#character').html('<img src="ninja_game/img/right2.png" />');
-			} else {
-				$('#character').html('<img src="ninja_game/img/right1.png" />');
-			}
-			if(x>500) {
-				x = 500;
-			}
-		} else if(e.keyCode == 40) {
-			y = y+10;
-			if(last_key == 40 && count%2 == 0) {
-				$('#character').html('<img src="ninja_game/img/down1.png" />');
-			} else {
-				$('#character').html('<img src="ninja_game/img/down2.png" />');
-			}
-			if(y>500) {
-				y = 500;
+		} else if(e.keyCode == 65 || e.keyCode == 87 || e.keyCode == 68 || e.keyCode == 83) {
+			if(e.keyCode == 65) {
+				a = a-10;
+				if(last_key == 65 && count%2 == 0) {
+					$('#character2').html('<img src="ninja_game/img/p2left2.png" />');
+				} else {
+					$('#character2').html('<img src="ninja_game/img/p2left1.png" />');
+				}
+				if(a < 0) {
+					a = 0;
+				}
+			} else if(e.keyCode == 87) {
+				b = b-10;
+				if(last_key == 87 && count%2 == 0) {
+					$('#character2').html('<img src="ninja_game/img/p2top2.png" />');
+				} else {
+					$('#character2').html('<img src="ninja_game/img/p2top1.png" />');
+				}
+				if(b < 0) {
+					b = 0;
+				}
+			} else if(e.keyCode == 68) {
+				a = a+10;
+				if(last_key == 68 && count%2 == 0) {
+					$('#character2').html('<img src="ninja_game/img/p2right2.png" />');
+				} else {
+					$('#character2').html('<img src="ninja_game/img/p2right1.png" />');
+				}
+				if(a > 500) {
+					a = 500;
+				}
+			} else if(e.keyCode == 83) {
+				b = b+10;
+				if(last_key == 83 && count%2 == 0) {
+					$('#character2').html('<img src="ninja_game/img/p2down1.png" />');
+				} else {
+					$('#character2').html('<img src="ninja_game/img/p2down2.png" />');
+				}
+				if(b>500) {
+					b = 500;
+				}
 			}
 		}
 		last_key = e.keyCode;
 		count++;
-		console.log(e.keyCode, x, count%2);
 	}
-	console.log(document);
 	</script>
 
 </body>
